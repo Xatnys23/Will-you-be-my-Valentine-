@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(⁠ʃ⁠ƪ⁠＾⁠3⁠＾⁠）♡⁠)</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+        }
+        h1 {
+            color: #ff4d79;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            min-width: 120px;
+            transition: all 0.5s ease;
+        }
+        @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        }
+        .yes {
+            background-color: #c8a2c8;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            animation: bounce 0.6s infinite ease-in-out;
+            transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out, padding 0.3s ease-in-out;
+        }
+
+        .yes:hover {
+            background-color: #a875a8;
+        }
+        .no {
+            background-color: white;
+            color: black;
+            border: 2px solid #ccc;
+            position: relative;
+        }
+        .no:hover {
+            background-color: #f8d7da;
+        }
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="valentineGif" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDdkdGYyNHQ1ZGRqbGd0ZW9qcDhqeGNlb3V4NTA2azRtdzJpMXdnYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MnkVb2TyZ08mZEkhUU/giphy.gif" alt="Valentine GIF">
+    <h1 id="message">Will you be my Valentine?</h1>
+    <div class="buttons">
+        <button class="btn yes" onclick="acceptProposal()">Yes</button>
+        <button class="btn no" onclick="rejectProposal()">No</button>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        const noButton = document.querySelector('.no');
+        const yesButton = document.querySelector('.yes');
+        const gif = document.getElementById('valentineGif');
+        const message = document.getElementById('message');
+
+        function rejectProposal() {
+            noClickCount++;
+            switch (noClickCount) {
+                case 1:
+                    gif.src = "https://tenor.com/view/sad-dejected-down-pusheen-cat-gif-12694673.gif";
+                    message.textContent = "Are you sure?";
+                    noButton.style.position = "absolute";
+                    noButton.style.top = "10%";
+                    noButton.style.right = "20%";
+                    break;
+                case 2:
+                    gif.src = "https://tenor.com/view/dejected-sad-down-pusheen-cute-gif-12694700.gif";
+                    message.textContent = "Really???";
+                    noButton.style.top = "20%";
+                    noButton.style.right = "60%";
+                    break;
+                case 3:
+                    gif.src = "https://tenor.com/view/fat-cat-crying-sad-tears-gif-16615271.gif";
+                    message.textContent = "Pretty pleaseee";
+                    noButton.style.top = "80%";
+                    noButton.style.right = "50%";
+                    break;
+                case 4:
+                    gif.src = "https://tenor.com/view/pusheen-sighing-pusheen-sigh-gif-9567468551133033783.gif";
+                    message.textContent = "Just this once";
+                    noButton.style.top = "90%";
+                    noButton.style.right = "20%";
+                    break;
+                default:
+                    break;
+            }
+            let newScale = 1 + noClickCount * 0.2;
+            let newFontSize = 16 + noClickCount * 3; 
+            let newPadding = 10 + noClickCount * 2;
+
+            yesButton.style.transform = `scale(${newScale})`;
+            yesButton.style.fontSize = `${newFontSize}px`;
+            yesButton.style.padding = `${newPadding}px ${newPadding * 2}px`;
+
+            let newBounceHeight = -10 - noClickCount * 2; 
+
+            let styleSheet = document.styleSheets[0];
+            styleSheet.insertRule(`
+                @keyframes bounce {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(${newBounceHeight}px); }
+                }
+            `, styleSheet.cssRules.length);
+        }
+
+        function acceptProposal() {
+            gif.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZm9sMzN1N2U0ZGF6NThpOXc4bHVvd2Voem0yYjRwaHNiaGJjcWVvNCZlcD12MV9pbnRlcm5naWZfYnlfaWQmY3Q9Zw/osjgQPWRx3cac/giphy.gif";
+            message.textContent = "Yay!";
+            document.querySelector('.buttons').style.display = "none";
+        }
+    </script>
+</body>
+</html>
